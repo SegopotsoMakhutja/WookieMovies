@@ -13,3 +13,7 @@ export interface IMovie {
   slug: string;
   title: string;
 }
+
+export interface IMovieList {
+  movies: Array<IMovie>;
+}
