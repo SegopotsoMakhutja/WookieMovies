@@ -1,5 +1,4 @@
-/* eslint-disable prettier/prettier */
-import { IMovieList } from '../types/types';
+import { IMovieList, IMovie } from '../types/types';
 
 const { REACT_APP_API_HOST, REACT_APP_AUTH_TOKEN } = process.env;
 
@@ -15,8 +14,8 @@ export const getMovieList = async (): Promise<IMovieList> => {
   return data.json();
 };
 
-export const getMovie = async (id: string): Promise<IMovieList> => {
-  const data = await fetch(`${REACT_APP_API_HOST}/${id}`, {
+export const getMovie = async (slug: string): Promise<IMovie> => {
+  const data = await fetch(`${REACT_APP_API_HOST}/${slug}`, {
     method: 'GET',
     headers: myHeaders,
   });
@@ -24,10 +23,9 @@ export const getMovie = async (id: string): Promise<IMovieList> => {
 };
 
 export const searchMovie = async (query: string): Promise<IMovieList> => {
-  return fetch(`${REACT_APP_API_HOST}?q=${query}`, {
+  const data = await fetch(`${REACT_APP_API_HOST}?q=${query}`, {
     method: 'GET',
     headers: myHeaders,
-  })
-    .then((res) => res.json())
-    .catch((err) => err);
+  });
+  return data.json();
 };
