@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import {
-  GridItem, Grid, Flex, Spinner, Heading,
+  GridItem,
+  Grid,
+  Flex,
+  Spinner,
+  Heading,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
 } from '@chakra-ui/react';
 import { getMovieList } from '../../services/movies.services';
 import { IMovieList, IMovie } from '../../types/types';
@@ -31,7 +40,25 @@ const Home = () => {
   const filteredMovies = movies?.movies.filter((movie) => movie.title.toLowerCase().includes(searchValue.toLowerCase()));
 
   // filter by multiple genres
-  // const getMoviesByGenres = movies?.movies.filter((movie) => movie.genres.includes('Action'));
+  const getMoviesByGenres = movies?.movies.filter((movie) => movie.genres.includes('Action'));
+
+  console.log(getMoviesByGenres);
+
+  const getAllUniqueGenres = (items: IMovie[]) => {
+    const genres = items.reduce((acc: any, movie) => {
+      movie.genres.forEach((genre) => {
+        if (!acc.includes(genre)) {
+          acc.push(genre);
+        }
+      });
+      return acc;
+    }, []);
+    return genres;
+  };
+
+  if (movies && movies.movies.length > 0) {
+    console.log(getAllUniqueGenres(movies?.movies));
+  }
 
   return (
     <Flex justifyContent="center" alignItems="center" flexDir={{ base: 'column' }}>
@@ -49,6 +76,27 @@ const Home = () => {
         </Heading>
       ) : null}
       {/* movie tabs here. */}
+      <Flex justifyContent="center" alignItems="center">
+        <Tabs onChange={(index) => console.log(index)}>
+          <TabList>
+            <Tab>One</Tab>
+            <Tab>Two</Tab>
+            <Tab>Three</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>
+              <p>one!</p>
+            </TabPanel>
+            <TabPanel>
+              <p>two!</p>
+            </TabPanel>
+            <TabPanel>
+              <p>three!</p>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Flex>
       <Grid templateColumns="repeat(5, 1fr)" gap={4}>
         {filteredMovies ? filteredMovies.map((movie: IMovie) => (
           <GridItem key={movie.id}>
