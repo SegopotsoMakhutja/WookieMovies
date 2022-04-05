@@ -17,6 +17,8 @@ import {
   MdMenu,
   MdClose,
 } from 'react-icons/md';
+import { AiFillHeart } from 'react-icons/ai';
+
 import { useNavigate } from '@tanstack/react-location';
 
 import { ColorModeSwitcher } from '../../../ColorModeSwitcher';
@@ -26,6 +28,7 @@ import { NavItem } from '../NavItem';
 
 const NavItems: Array<LinkItemProps> = [
   { name: 'Home', icon: MdHome, path: '/' },
+  { name: 'Favorites', icon: AiFillHeart, path: '/favorites' },
   { name: 'Explore', icon: MdExplore, path: '/search-results' },
   { name: 'Box Office', icon: MdMovieFilter, path: '/box-office' },
 ];

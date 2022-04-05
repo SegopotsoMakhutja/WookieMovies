@@ -50,8 +50,6 @@ const MovieDetails = ({ movie }: IMovieDetailsProps) => {
   // should just hold, movie IDs
   const [favorites, setFavorites] = useState<string[]>([]);
 
-  // const getFavoriteIcon = (movieId: string) => (favorites.includes(movieId) ? AiFillHeart : AiOutlineHeart);
-
   // just check if the movie is in the favorites array
   // if it is in the array, then it will be removed, otherwise it will be added.
   // also change the icon to a filled heart if it is, otherwise an empty heart.
@@ -98,6 +96,7 @@ const MovieDetails = ({ movie }: IMovieDetailsProps) => {
   const getArray = JSON.parse(localStorage.getItem('favorites') || '[]');
   const isFavorite = getArray.includes(movie.id);
 
+  // onMount of component get the favorites array from localStorage
   useEffect(() => {
     if (localStorage.getItem('favorites') !== null) {
       setFavorites(JSON.parse(localStorage.getItem('favorites') || '[]'));
