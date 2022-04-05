@@ -19,6 +19,7 @@ import { SearchBar } from '../../components/SearchBar';
 const Home = () => {
   const [movies, setMovies] = useState<IMovieList>();
   const [searchValue, setSearchValue] = useState('');
+  const [movieGenres, setMovieGenres] = useState([]);
 
   const onSearch = (key: string) => {
     setSearchValue(key);
@@ -39,11 +40,6 @@ const Home = () => {
 
   const filteredMovies = movies?.movies.filter((movie) => movie.title.toLowerCase().includes(searchValue.toLowerCase()));
 
-  // filter by multiple genres
-  const getMoviesByGenres = movies?.movies.filter((movie) => movie.genres.includes('Action'));
-
-  console.log(getMoviesByGenres);
-
   const getAllUniqueGenres = (items: IMovie[]) => {
     const genres = items.reduce((acc: any, movie) => {
       movie.genres.forEach((genre) => {
@@ -56,9 +52,28 @@ const Home = () => {
     return genres;
   };
 
-  if (movies && movies.movies.length > 0) {
-    console.log(getAllUniqueGenres(movies?.movies));
-  }
+  useEffect(() => {
+    if (filteredMovies && filteredMovies.length > 0) {
+      setMovieGenres(getAllUniqueGenres(filteredMovies));
+    }
+  }, [movies]);
+
+  // eslint-disable-next-line arrow-body-style
+  const getMoviesByGenres = (genre: string) => {
+    // filter by multiple genre passed as an arg
+    return movies?.movies.filter((movie) => movie.genres.includes(genre)) || [];
+  };
+
+  // map each genre to the movies that include that genre
+  // eslint-disable-next-line arrow-body-style
+  const mapMoviesToGenre = movieGenres.map((genre) => {
+    return {
+      label: genre,
+      movies: getMoviesByGenres(genre),
+    };
+  });
+
+  console.log(mapMoviesToGenre);
 
   return (
     <Flex justifyContent="center" alignItems="center" flexDir={{ base: 'column' }}>
@@ -77,33 +92,27 @@ const Home = () => {
       ) : null}
       {/* movie tabs here. */}
       <Flex justifyContent="center" alignItems="center">
-        <Tabs onChange={(index) => console.log(index)}>
+        <Tabs>
           <TabList>
-            <Tab>One</Tab>
-            <Tab>Two</Tab>
-            <Tab>Three</Tab>
+            <Tab> All </Tab>
+            {mapMoviesToGenre.map((genre) => <Tab key={genre.label}>{genre.label}</Tab>)}
           </TabList>
 
           <TabPanels>
-            <TabPanel>
-              <p>one!</p>
-            </TabPanel>
-            <TabPanel>
-              <p>two!</p>
-            </TabPanel>
-            <TabPanel>
-              <p>three!</p>
-            </TabPanel>
+            {mapMoviesToGenre.map((genre, idx) => (
+              <TabPanel>
+                <Grid templateColumns="repeat(5, 1fr)" gap={4}>
+                  {genre.movies ? genre.movies.map((movie: IMovie) => (
+                    <GridItem key={movie.id}>
+                      <MovieCard movie={movie} />
+                    </GridItem>
+                  )) : <Spinner label="loading movies" />}
+                </Grid>
+              </TabPanel>
+            ))}
           </TabPanels>
         </Tabs>
       </Flex>
-      <Grid templateColumns="repeat(5, 1fr)" gap={4}>
-        {filteredMovies ? filteredMovies.map((movie: IMovie) => (
-          <GridItem key={movie.id}>
-            <MovieCard movie={movie} />
-          </GridItem>
-        )) : <Spinner label="loading movies" />}
-      </Grid>
     </Flex>
   );
 };
