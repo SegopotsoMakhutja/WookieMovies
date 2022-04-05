@@ -41,23 +41,54 @@ Make sure to include all source code in the repository.
 
 ### Evaluation Criteria
 
--   [x] **TypeScript** best practices
--   [x] We're looking for you to produce working code, with enough room to demonstrate how to structure components in a small program.
--   [x] Show us your work through your commit history
+-   [ ] **TypeScript** best practices
+-   [ ] We're looking for you to produce working code, with enough room to demonstrate how to structure components in a small program.
+-   [ ] Show us your work through your commit history
 -   [ ] Completeness: did you complete the features?
 -   [ ] Correctness: does the functionality act in sensible, thought-out ways?
 -   [ ] Maintainability: is it written in a clean, maintainable way?
 -   [ ] Testing: is the system adequately tested?
 
 ### Solution
-**Screenshots**
+
+### Wins
+- added a lot of new features, enhanced the project.
+    * added favorites section, 
+    * no search results found, 
+    * 404 page, 
+    * some nice transitions and hover animations, 
+    * movie ratings calculations with stars filled or empty, or half filled.
+- I was able to get the project to work with the API and the design.
+
+### Challenges
+- categorising the movies by genre.
+- making the app fully responive and accessible.
+
+## Future Enhancements
+- explore page, box office for new movies, and more.
+### 📸 Screenshots
+#### Home View Light Mode
+![Alt text - Home View in LightMode](/wookie-movies/public/Screenshot%202022-04-05%20at%2022.22.49.png?raw=true "Home View Light Mode")
+#### Home View Dark Mode
+![Alt text - Desktop View expanded](/wookie-movies/public/Screenshot%202022-04-05%20at%2022.23.04.png?raw=true)
+
+#### Search Results View
+![Alt text - Desktop View expanded](/wookie-movies/public/Screenshot%202022-04-05%20at%2022.23.26.png?raw=true)
+
+#### Favorites View Dark Mode
+![Alt text - Desktop View expanded](/wookie-movies/public/Screenshot%202022-04-05%20at%2022.34.43.png?raw=true)
+#### Movie Details View
+![Alt text - Desktop View expanded](/wookie-movies/public/Screenshot%202022-04-05%20at%2022.23.44.png?raw=true)
+#### Remove from Favorites toast
+![Alt text - Desktop View expanded](/wookie-movies/public/Screenshot%202022-04-05%20at%2022.23.50.png?raw=true)
+#### Favorites View Dark Mode
+![Alt text - Desktop View expanded](/wookie-movies/public/Screenshot%202022-04-05%20at%2022.24.02.png?raw=true)
 
 ### Thoughts
 
 -   Mobile responsiveness wasn't a priority for this project, but it's a good idea to have a responsive design.
 -   I would like to see a more detailed view of the movie details. be able to click on the cast and crew members to see their details or see other movies they star in.
 -   some challenges that were a bit unexpected, is sorting the movies according genre, I initially thought the movies belonged to a certain genre, but I realized that the genre was a list.
-
 
 ### CodeSubmit
 
