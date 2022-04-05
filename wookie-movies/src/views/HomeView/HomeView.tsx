@@ -5,11 +5,6 @@ import {
   Flex,
   Spinner,
   Heading,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
 } from '@chakra-ui/react';
 import { getMovieList } from '../../services/movies.services';
 import { IMovieList, IMovie } from '../../types/types';
@@ -73,8 +68,6 @@ const Home = () => {
     };
   });
 
-  console.log(mapMoviesToGenre);
-
   return (
     <Flex justifyContent="center" alignItems="center" flexDir={{ base: 'column' }}>
       <SearchBar handleSearch={onSearch} searchValue={searchValue} />
@@ -92,26 +85,13 @@ const Home = () => {
       ) : null}
       {/* movie tabs here. */}
       <Flex justifyContent="center" alignItems="center">
-        <Tabs>
-          <TabList>
-            <Tab> All </Tab>
-            {mapMoviesToGenre.map((genre) => <Tab key={genre.label}>{genre.label}</Tab>)}
-          </TabList>
-
-          <TabPanels>
-            {mapMoviesToGenre.map((genre, idx) => (
-              <TabPanel>
-                <Grid templateColumns="repeat(5, 1fr)" gap={4}>
-                  {genre.movies ? genre.movies.map((movie: IMovie) => (
-                    <GridItem key={movie.id}>
-                      <MovieCard movie={movie} />
-                    </GridItem>
-                  )) : <Spinner label="loading movies" />}
-                </Grid>
-              </TabPanel>
-            ))}
-          </TabPanels>
-        </Tabs>
+        <Grid templateColumns="repeat(5, 1fr)" gap={4}>
+          {filteredMovies ? filteredMovies.map((movie: IMovie) => (
+            <GridItem key={movie.id}>
+              <MovieCard movie={movie} />
+            </GridItem>
+          )) : <Spinner label="loading movies" />}
+        </Grid>
       </Flex>
     </Flex>
   );
