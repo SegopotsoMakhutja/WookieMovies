@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  GridItem, Grid, Flex, Spinner,
+  GridItem, Grid, Flex, Spinner, Heading,
 } from '@chakra-ui/react';
 import { getMovieList } from '../../services/movies.services';
 import { IMovieList, IMovie } from '../../types/types';
@@ -36,6 +36,18 @@ const Home = () => {
   return (
     <Flex justifyContent="center" alignItems="center" flexDir={{ base: 'column' }}>
       <SearchBar handleSearch={onSearch} searchValue={searchValue} />
+      {filteredMovies?.length === 0 ? (
+        <Heading
+          mt={10}
+          display="inline-block"
+          as="h2"
+          size="2xl"
+          bgGradient="linear(to-r, purple.400, purple.600)"
+          backgroundClip="text"
+        >
+          No Results Found.
+        </Heading>
+      ) : null}
       {/* movie tabs here. */}
       <Grid templateColumns="repeat(5, 1fr)" gap={4}>
         {filteredMovies ? filteredMovies.map((movie: IMovie) => (
